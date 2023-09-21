@@ -19,7 +19,7 @@
             gpuInfoDiv.innerHTML = "<strong>gpu Information:</strong><br>";
             gpus.forEach((gpu, index) => {
               gpuInfoDiv.innerHTML += `gpu ${index + 1}:<br>`;
-              
+              gpuInfoDiv.innerHTML += `Temperature: ${gpu.temperature.toFixed(2)}°C<br>`;
               gpuInfoDiv.innerHTML += `Usage: ${gpu.usage.toFixed(2)}%<br><br>`;
             });
           }
