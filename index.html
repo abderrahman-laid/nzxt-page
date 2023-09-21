@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CPU Temperature Monitor</title>
-  <script>
-    function updateCpuTemperature() {
-      // Simulated CPU temperature (replace this with your real data retrieval logic)
-      const simulatedCpuTemperature = Math.floor(Math.random() * 100) + 30;
-      document.getElementById('cpuTemperature').innerText = `CPU Temperature: ${simulatedCpuTemperature}°C`;
-    }
-
-    // Update CPU temperature every 5 seconds (5000 milliseconds)
-    setInterval(updateCpuTemperature, 5000);
-  </script>
+  <title>NZXT AIO CPU Temp Monitor</title>
 </head>
 <body>
-  <h1>CPU Temperature Monitor</h1>
-  <div id="cpuTemperature">CPU Temperature: --°C</div>
+  <h1>CPU Temperatures</h1>
+  <div id="cpuTemps"></div>
+
+  <script src="https://unpkg.com/@nzxt/web-integrations-types"></script>
+  <script>
+    window.nzxt = {
+      v1: {
+        onMonitoringDataUpdate: (data) => {
+          const { cpus } = data;
+
+          const cpuTempsDiv = document.getElementById('cpuTemps');
+          if (cpuTempsDiv) {
+            cpuTempsDiv.innerHTML = "CPU Temperatures: ";
+            cpus.forEach((cpu, index) => {
+              cpuTempsDiv.innerHTML += `CPU ${index + 1}: ${cpu.temperature.toFixed(2)}°C | `;
+            });
+          }
+        }
+      }
+    };
+  </script>
 </body>
 </html>
