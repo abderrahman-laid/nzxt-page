@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NZXT AIO CPU Monitor</title>
+  <title>NZXT AIO gpu Monitor</title>
 </head>
 <body>
-  <h1>CPU Information</h1>
-  <div id="cpuInfo"></div>
+  <h1>gpu Information</h1>
+  <div id="gpuInfo"></div>
 
   <script src="https://unpkg.com/@nzxt/web-integrations-types"></script>
   <script>
     window.nzxt = {
       v1: {
         onMonitoringDataUpdate: (data) => {
-          const { cpus } = data;
+          const { gpus } = data;
 
-          const cpuInfoDiv = document.getElementById('cpuInfo');
-          if (cpuInfoDiv) {
-            cpuInfoDiv.innerHTML = "<strong>CPU Information:</strong><br>";
-            cpus.forEach((cpu, index) => {
-              cpuInfoDiv.innerHTML += `CPU ${index + 1}:<br>`;
-              cpuInfoDiv.innerHTML += `Temperature: ${cpu.temperature.toFixed(2)}°C<br>`;
-              cpuInfoDiv.innerHTML += `Usage: ${cpu.usage.toFixed(2)}%<br><br>`;
+          const gpuInfoDiv = document.getElementById('gpuInfo');
+          if (gpuInfoDiv) {
+            gpuInfoDiv.innerHTML = "<strong>gpu Information:</strong><br>";
+            gpus.forEach((gpu, index) => {
+              gpuInfoDiv.innerHTML += `gpu ${index + 1}:<br>`;
+              gpuInfoDiv.innerHTML += `Temperature: ${gpu.temperature.toFixed(2)}°C<br>`;
+              gpuInfoDiv.innerHTML += `Usage: ${gpu.usage.toFixed(2)}%<br><br>`;
             });
           }
         }
