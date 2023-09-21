@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NZXT AIO GPU Temperature Display</title>
+  <title>NZXT AIO CPU Temp Monitor</title>
 </head>
 <body>
-  <div id="gpu-temperature"></div>
-  <script>
-    // npm install @nzxt/web-integrations-types
-    // import { MonitoringData } from "@nzxt/web-integrations-types/v1";
+  <h1>CPU Temperatures</h1>
+  <div id="cpuTemps"></div>
 
+  <script src="https://unpkg.com/@nzxt/web-integrations-types"></script>
+  <script>
     window.nzxt = {
       v1: {
         onMonitoringDataUpdate: (data) => {
-          const { gpus } = data;
+          const { cpus } = data;
 
-          // Extract GPU temperature (assuming there's only one GPU)
-          const gpuTemperature = gpus[0]?.temperature;
-
-          // Display GPU temperature
-          const gpuTemperatureDiv = document.getElementById('gpu-temperature');
-          gpuTemperatureDiv.innerHTML = `GPU Temperature: ${gpuTemperature}°C`;
+          const cpuTempsDiv = document.getElementById('cpuTemps');
+          if (cpuTempsDiv) {
+            cpuTempsDiv.innerHTML = "CPU Temperatures: ";
+            cpus.forEach((cpu, index) => {
+              cpuTempsDiv.innerHTML += `CPU ${index + 1}: ${cpu.temperature.toFixed(2)}°C | `;
+            });
+          }
         }
       }
     };
