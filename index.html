@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NZXT AIO CPU Temp Monitor</title>
+  <title>NZXT AIO CPU Monitor</title>
 </head>
 <body>
-  <h1>CPU Temperatures</h1>
-  <div id="cpuTemps"></div>
+  <h1>CPU Information</h1>
+  <div id="cpuInfo"></div>
 
   <script src="https://unpkg.com/@nzxt/web-integrations-types"></script>
   <script>
@@ -14,11 +14,13 @@
         onMonitoringDataUpdate: (data) => {
           const { cpus } = data;
 
-          const cpuTempsDiv = document.getElementById('cpuTemps');
-          if (cpuTempsDiv) {
-            cpuTempsDiv.innerHTML = "CPU Temperatures: ";
+          const cpuInfoDiv = document.getElementById('cpuInfo');
+          if (cpuInfoDiv) {
+            cpuInfoDiv.innerHTML = "<strong>CPU Information:</strong><br>";
             cpus.forEach((cpu, index) => {
-              cpuTempsDiv.innerHTML += `CPU ${index + 1}: ${cpu.temperature.toFixed(2)}°C | `;
+              cpuInfoDiv.innerHTML += `CPU ${index + 1}:<br>`;
+              cpuInfoDiv.innerHTML += `Temperature: ${cpu.temperature.toFixed(2)}°C<br>`;
+              cpuInfoDiv.innerHTML += `Usage: ${cpu.usage.toFixed(2)}%<br><br>`;
             });
           }
         }
